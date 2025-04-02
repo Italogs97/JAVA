@@ -9,6 +9,7 @@ public class App {
         // Mensagem de boas-vindas ao sistema bancário
         System.out.println("Bem-vindo ao sistema bancário!");
 
+        
         // Solicita o nome do cliente
         System.out.print("Digite o nome do cliente: ");
         String nomeCliente = scanner.nextLine(); // Captura o nome do cliente
