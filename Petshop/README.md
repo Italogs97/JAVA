@@ -1,18 +1,80 @@
-## Getting Started
+# Petshop 🐾
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este é um projeto Java desenvolvido com **Programação Orientada a Objetos (POO)** para simular o gerenciamento de um petshop, permitindo cadastrar clientes, pets e serviços de forma estruturada.
 
-## Folder Structure
+## 📌 Tecnologias Utilizadas
 
-The workspace contains two folders by default, where:
+- **Java** (sem frameworks externos)
+- **Paradigma POO** (Classes, Objetos, Encapsulamento, Herança)
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## 🚀 Funcionalidades
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- 📋 **Cadastro de Clientes:** Armazena informações dos donos dos pets.
+- 🐶 **Cadastro de Animais:** Relaciona um pet ao seu respectivo dono, incluindo dados como nome, raça e idade.
+- 🗓️ **Gerenciamento de Agendamentos:** Controla quando um pet irá receber um serviço.
+- 💰 **Registro de Serviços:** Define serviços como banho, tosa e consulta veterinária, associando valores.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## 🔧 Como Executar o Projeto
 
-## Dependency Management
+1️⃣ **Clone o repositório:**
+```bash
+git clone https://github.com/Italogs97/JAVA.git
+```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+2️⃣ **Acesse a pasta do projeto:**
+```bash
+cd JAVA/Petshop
+```
+
+3️⃣ **Compile os arquivos Java:**
+```bash
+javac *.java
+```
+
+4️⃣ **Execute o programa:**
+```bash
+java Petshop
+```
+
+## 📜 Estrutura do Projeto
+
+```plaintext
+Petshop/
+├── Cliente.java       # Representa os clientes do petshop
+├── Animal.java        # Representa os pets cadastrados
+├── Servico.java       # Define serviços oferecidos pelo petshop
+└── Petshop.java       # Classe principal que gerencia as interações
+```
+
+## 📖 Conceitos Utilizados
+
+- **Encapsulamento:** Uso de modificadores de acesso para proteger atributos.
+- **Associação:** Relacionamento entre Cliente e Animal.
+- **Manipulação de Listas:** Para armazenar e gerenciar clientes, animais e serviços.
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um **fork** do repositório.
+2. Crie uma **branch** para sua feature:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça **commit** das alterações:
+   ```bash
+   git commit -m "Minha nova feature"
+   ```
+4. Envie para o repositório remoto:
+   ```bash
+   git push origin minha-feature
+   ```
+5. Abra um **Pull Request**.
+
+## 📄 Licença
+
+Este projeto está sob a **licença MIT**. Consulte o arquivo LICENSE para mais detalhes.
+
+---
+
+Caso queira adicionar mais detalhes ou melhorar a organização, só avisar! 🚀
