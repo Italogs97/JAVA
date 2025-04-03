@@ -30,9 +30,13 @@ public class Conta {
         }
     }
 
+    public static void main(String[] args) {
+        
+    }
     private final String numero; // Número da conta
     private final String agencia; // Número da agência
     private final Cliente cliente; // Cliente associado à conta
+    private double chequeEspecial; // Limite do cheque especial 
     private double saldo; // Saldo da conta
 
     // Construtor da classe Conta
@@ -41,6 +45,7 @@ public class Conta {
         this.agencia = agencia; // Inicializa o número da agência
         this.saldo = 450.0; // Define o saldo inicial padrão como 450.0
         this.cliente = cliente; // Associa o cliente à conta
+        this.chequeEspecial = 1000; // Inicializa o cheque especial como 0.0
     }
 
     // Retorna o número da conta
@@ -63,6 +68,11 @@ public class Conta {
         return cliente;
     }
 
+    // Retorna o limite do cheque especial
+    public double getChequeEspecial() {
+        return chequeEspecial;
+    }
+
     // Método para depositar dinheiro na conta
     public void depositar(double valor) {
         if (valor > 0) {
@@ -75,11 +85,16 @@ public class Conta {
 
     // Método para sacar dinheiro da conta
     public boolean sacar(double valor) {
-        if (valor > 0 && valor <= saldo) {
+        double saldoDisponivel = saldo + chequeEspecial; // Saldo disponível inclui o cheque especial
+        if (valor > 0 && valor <= saldoDisponivel) {
             saldo -= valor; // Subtrai o valor do saldo
+            System.out.println("Saque realizado com sucesso!");
+            if (saldo < 0) {
+                System.out.println("Você está utilizando o cheque especial.");
+            }
             return true; // Saque realizado com sucesso
         } else {
-            System.out.println("Saldo insuficiente ou valor inválido."); // Mensagem de erro
+            System.out.println("Erro: Saldo insuficiente ou valor inválido."); // Mensagem de erro
             return false; // Saque não realizado
         }
     }
@@ -94,5 +109,27 @@ public class Conta {
     } else {
         System.out.println("Valor inválido para cobrança Pix.");
     }
-}
+    }
+
+
+        
+    // Método para pagar um boleto
+    public void pagarBoleto(double valor, String codigoBoleto) {
+        double saldoDisponivel = saldo + chequeEspecial; // Saldo disponível inclui o cheque especial
+        if (valor <= 0) {
+            System.out.println("Erro: O valor do boleto deve ser maior que zero.");
+            return;
+        }
+    
+        if (valor <= saldoDisponivel) {
+            saldo -= valor; // Subtrai o valor do saldo
+            System.out.println("Pagamento do boleto " + codigoBoleto + " realizado com sucesso.");
+            System.out.println("Novo saldo: R$" + saldo);
+            if (saldo < 0) {
+                System.out.println("Você está utilizando o cheque especial.");
+            }
+        } else {
+            System.out.println("Erro: Saldo insuficiente para pagar o boleto.");
+        }
+    }
 }
