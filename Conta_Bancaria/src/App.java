@@ -2,6 +2,9 @@ import java.util.Scanner; // Importa a classe Scanner para capturar entradas do 
 
 public class App {
 
+    private static final double CHEQUE_ESPECIAL = 1000.0; // Limite do cheque especial 
+
+
     // Objeto Scanner para capturar entradas do usuário no console
     private final static Scanner scanner = new Scanner(System.in);
 
@@ -32,7 +35,12 @@ public class App {
         System.out.println("Conta: " + conta.getNumero()); // Exibe o número da conta
         System.out.println("Cliente: " + conta.getCliente().getName()); // Exibe o nome do cliente
         System.out.println("Saldo: " + conta.getSaldo()); // Exibe o saldo inicial da conta
+
+         // chama o método para exibir o menu de oparações
+       
+    exibirMenu(conta);
     }
+
 
     // Método para validar entradas numéricas com tamanho fixo
     private static String validarEntrada(String mensagem, int tamanho) {
@@ -47,4 +55,77 @@ public class App {
         } while (entrada.length() != tamanho || !entrada.matches("\\d+")); // Repete até a entrada ser válida
         return entrada; // Retorna a entrada válida
     }
+
+    
+   
+
+    // Método para exibir o menu de operações
+    private static void exibirMenu(Conta conta){
+         boolean continuar = true; // Variável para controlar o loop do menu
+    
+
+    while(continuar){
+
+        System.out.println("\nEscolha uma operação:");
+        System.out.println("1. Depositar"); // Opção para depositar
+        System.out.println("2. Sacar"); // Opção para sacar
+        System.out.println("3. Consultar saldo"); // Opção para consultar saldo
+        System.out.println("4. Cheque Especial"); // Opção para cheque especial
+        System.out.println("5. Boleto"); // Opção para boleto
+        System.out.println("6. Pix de recebimento"); // Opção para Pix
+        System.out.println("7. Sair"); // Opção para sair
+        System.out.print("Opção: ");// Solicita a opção do usuário
+
+        int opcao = scanner.nextInt(); // Captura a opção escolhida pelo usuário
+        scanner.nextLine(); // Limpa o buffer do scanner
+
+
+        switch (opcao){
+            case 1: // Depósito
+            System.out.println("Digite o valor a ser depositado: ");
+            double valorDeposito = scanner.nextDouble();
+            scanner.nextLine(); // Consumir o caractere de nova linha
+            conta.depositar(valorDeposito); // Chama o método de depósito
+            break;
+
+        case 2: // Saque
+            System.out.println("Digite o valor que deseja sacar: ");
+            double valorSaque = scanner.nextDouble(); // Captura o valor a ser sacado
+            scanner.nextLine(); // Consumir o caractere de nova linha
+            if (conta.sacar(valorSaque)) { // Chama o método de saque
+                System.out.println("Saque realizado com sucesso!"); // Mensagem de sucesso
+            }
+            break;
+
+            case 3: // Consultar saldo
+                System.out.println("Seu saldo é: " + conta.getSaldo()); // Exibe o saldo atual
+                break; // Sai do switch
+
+            
+            case 4: // Cheque Especial
+                System.out.println("Seu saldo é: " + conta.getSaldo()); // Exibe o saldo atual
+                System.out.println("Seu limite de cheque especial é: " + CHEQUE_ESPECIAL); // Exibe o limite do cheque especial
+                break; // Sai do switch
+
+            case 5: // Boleto
+                System.out.println("Funcionalidade de Boleto ainda não implementada.");
+                break;
+
+            case 6: //Cobrança Pix
+            System.out.println("Digite o valor a ser cobrado ");
+            double valorPix = scanner.nextDouble();
+            scanner.nextLine(); // Consumir o caractere de nova linha
+            conta.pix(valorPix); // Chama o método de depósito
+            break;
+                
+            case 7: // Sair
+                System.out.println("Obrigado por usar o sistema bancário!");
+                continuar = false; // Encerra o loop
+                break;
+            }
+        }
+
+    }
+
+
 }

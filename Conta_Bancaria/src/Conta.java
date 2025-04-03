@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 public class Conta {
 
     // Classe Cliente como uma classe estática interna
@@ -60,4 +62,37 @@ public class Conta {
     public Cliente getCliente() {
         return cliente;
     }
+
+    // Método para depositar dinheiro na conta
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor; // Adiciona o valor ao saldo
+            System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+        } else {
+            System.out.println("Valor de depósito inválido.");
+        }
+    }
+
+    // Método para sacar dinheiro da conta
+    public boolean sacar(double valor) {
+        if (valor > 0 && valor <= saldo) {
+            saldo -= valor; // Subtrai o valor do saldo
+            return true; // Saque realizado com sucesso
+        } else {
+            System.out.println("Saldo insuficiente ou valor inválido."); // Mensagem de erro
+            return false; // Saque não realizado
+        }
+    }
+
+    // Método para depositar dinheiro na conta
+    public void pix(double valor) {
+    if (valor > 0) {
+        String chavePix = UUID.randomUUID().toString(); // Gera uma chave Pix aleatória
+        System.out.println("Cobrança Pix gerada com sucesso!");
+        System.out.println("Valor: R$" + valor);
+        System.out.println("Chave Pix: " + chavePix);
+    } else {
+        System.out.println("Valor inválido para cobrança Pix.");
+    }
+}
 }
