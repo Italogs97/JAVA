@@ -2,8 +2,6 @@ import java.util.Scanner; // Importa a classe Scanner para capturar entradas do 
 
 public class App {
 
-    private static final double CHEQUE_ESPECIAL = 1000.0; // Limite do cheque especial 
-
 
     // Objeto Scanner para capturar entradas do usuário no console
     private final static Scanner scanner = new Scanner(System.in);
@@ -74,6 +72,7 @@ public class App {
         System.out.println("5. Boleto"); // Opção para boleto
         System.out.println("6. Pix de recebimento"); // Opção para Pix
         System.out.println("7. Sair"); // Opção para sair
+        System.out.println("8. Saldo disponível"); // Opção para saldo disponível
         System.out.print("Opção: ");// Solicita a opção do usuário
 
         int opcao = scanner.nextInt(); // Captura a opção escolhida pelo usuário
@@ -88,14 +87,15 @@ public class App {
             conta.depositar(valorDeposito); // Chama o método de depósito
             break;
 
-        case 2: // Saque
-            System.out.println("Digite o valor que deseja sacar: ");
-            double valorSaque = scanner.nextDouble(); // Captura o valor a ser sacado
-            scanner.nextLine(); // Consumir o caractere de nova linha
-            if (conta.sacar(valorSaque)) { // Chama o método de saque
-                System.out.println("Saque realizado com sucesso!"); // Mensagem de sucesso
-            }
-            break;
+        
+            case 2: // Saque
+                System.out.println("Digite o valor que deseja sacar: ");
+                double valorSaque = scanner.nextDouble(); // Captura o valor a ser sacado
+                scanner.nextLine(); // Consumir o caractere de nova linha
+                if (conta.sacar(valorSaque)) { // Chama o método de saque
+                    System.out.println("Saque realizado com sucesso!"); // Mensagem de sucesso
+                }
+                break;
 
             case 3: // Consultar saldo
                 System.out.println("Seu saldo é: " + conta.getSaldo()); // Exibe o saldo atual
@@ -104,11 +104,21 @@ public class App {
             
             case 4: // Cheque Especial
                 System.out.println("Seu saldo é: " + conta.getSaldo()); // Exibe o saldo atual
-                System.out.println("Seu limite de cheque especial é: " + CHEQUE_ESPECIAL); // Exibe o limite do cheque especial
+                System.out.println("Seu limite de cheque especial é: " + conta.getChequeEspecial()); // Usa o método getChequeEspecial()
                 break; // Sai do switch
 
+            
             case 5: // Boleto
-                System.out.println("Funcionalidade de Boleto ainda não implementada.");
+                System.out.println("Digite o código de barras do boleto: ");
+                String codigoBarras = scanner.nextLine(); // Captura o código de barras do boleto
+                System.out.println("Digite o valor do boleto: ");
+                double valorBoleto = scanner.nextDouble(); // Captura o valor do boleto
+                scanner.nextLine(); // Consumir o caractere de nova linha
+                if (valorBoleto > 0) {
+                    conta.pagarBoleto(valorBoleto, codigoBarras); // Chama o método de pagamento de boleto
+                } else {
+                    System.out.println("Erro: O valor do boleto deve ser maior que zero.");
+                }
                 break;
 
             case 6: //Cobrança Pix
@@ -122,10 +132,15 @@ public class App {
                 System.out.println("Obrigado por usar o sistema bancário!");
                 continuar = false; // Encerra o loop
                 break;
-            }
+
+            case 8: // Exibir saldo disponível
+                double saldoDisponivel = conta.getSaldo() + conta.getChequeEspecial(); // Usa o método getChequeEspecial()
+                System.out.println("Seu saldo disponível (incluindo cheque especial) é: R$" + saldoDisponivel);
+                break;
+            
         }
 
     }
-
-
 }
+}
+
